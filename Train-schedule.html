@@ -10,23 +10,11 @@
   <!-- Font Awesome CSS Icons (For cool glyphicons) -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">   
   <!-- Style to fix the issue of text extending past card length -->
-  <style>
-    .card-body a {
-      word-break: break-all;
-    }
-    .jumbotron {
-      padding-top: 1%;
-      padding-bottom: 1%;
-      margin-bottom: 0%;
-    }
-    .articleHeadline {
-      line-height: 1.5;
-    }
-    
-  </style>
 </head>
-
 <body>
 
   <!-- Main Bootstrap Search -->
@@ -40,19 +28,18 @@
           Train Schedule</strong>
       </h1>
     </div>
-
     <!-- Row for Searching New York Times -->
     <div class="row">
       <div class="col-sm-12">
         <br>
         <!-- First card is for handling the search parameters -->
         <div class="card">
-          <div class="card-header" style="font-size: 24px; text-align: center; background-color: rgb(228, 167, 167)">
+          <div class="card-header" id="schedule-card-header">
             <strong>Current Train Schedule</strong>
           </div>
           <div class="card-body">
             <ul class="list-group list-group-flush">
-              <li class="list-group-item list-group-item-primary">
+              <li class="list-group-item list-group-item-primary my-line-items">
                 <div class="row" style="text-align: center; font-weight: bold">
                   <div class="col-sm-2">Train Name</div>
                   <div class="col-sm-2">Destination</div>
@@ -61,7 +48,7 @@
                   <div class="col-sm-4">Minutes Away</div>
                 </div>
               </li>
-              <li class="list-group-item list-group-item-secondary">
+              <li class="list-group-item list-group-item-secondary my-line-items">
                 <div class="row" style="text-align: center">
                   <div class="col-sm-2">Train A</div>
                   <div class="col-sm-2">St. Louis</div>
@@ -70,7 +57,7 @@
                   <div class="col-sm-4">56</div>
                 </div>
               </li>
-              <li class="list-group-item list-group-item-secondary">
+              <li class="list-group-item list-group-item-secondary my-line-items">
                 <div class="row" style="text-align: center">
                   <div class="col-sm-2">Train B</div>
                   <div class="col-sm-2">Dallas</div>
@@ -83,10 +70,30 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-header" style="font-size: 24px; text-align: center; background-color:rgb(104, 161, 187)">
+          <div class="card-header" id="new-train-card-header">
               <strong>Add New Train</strong>
           </div>
           <div class="card-body">
+              <form role="form">
+                  <!-- Here we create the text box for capturing the search term-->
+                  <div class="form-group">
+                    <label for="train-name" class="my-labels">Train Name</label>
+                    <input type="text" class="form-control" id="train-name">
+                  </div>
+                  <div class="form-group">
+                      <label for="destination" class="my-labels">Destination</label>
+                      <input type="text" class="form-control" id="destination">
+                  </div>
+                  <div class="form-group">
+                      <label for="first-train-time" class="my-labels">First Train Time (hh:mm - military time)</label>
+                      <input type="text" class="form-control" id="first-train-time">
+                  </div>
+                  <div class="form-group">
+                    <label for="frequency" class="my-labels">Frequency (min)</label>
+                    <input type="text" class="form-control" id="frequency">
+                  </div>
+                  <button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
+              </form>
           </div>
       </div>
     </div>

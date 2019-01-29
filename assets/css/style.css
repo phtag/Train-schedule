@@ -1,0 +1,44 @@
+/* body { 
+    background: url("../images/abstract-q-c-640-480-5.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  } */
+.my-line-items {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.card {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    font-size: 14px;
+}
+.card-body a {
+    word-break: break-all;
+}
+.jumbotron {
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin-bottom: 0%;
+}
+.articleHeadline {
+    line-height: 1.5;
+}  
+.my-labels {
+    font-weight: bold;
+}
+#schedule-card-header {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-size: 24px; 
+    text-align: center; 
+    background-color: rgb(228, 167, 167);
+}
+#new-train-card-header {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-size: 24px; 
+    text-align: center; 
+    background-color:rgb(104, 161, 187);
+}

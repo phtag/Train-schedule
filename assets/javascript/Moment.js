@@ -12,12 +12,14 @@
   var Trains = {
     Names: [],
     Destinations: [],
-    Frequencies: []
+    Frequencies: [], 
+    FirstArrival: []
   }
   var initialTrains = {
     Names: ["Red Eye Rooster", "Silver Fox", "Mango Monster"],
     Destinations: ["Boston", "Anchorage", "Tacoma"],
-    Frequencies: [350, 1440, 120]
+    Frequencies: [350, 1440, 120],
+    FirstArrival: ["04:45", "09:21", "02:18"]
   }
   // database.ref().set({
   //   Trains: initialTrains
@@ -29,22 +31,42 @@
     var myTrains = value.Trains;
     for (i=0;i<myTrains.Names.length;i++) {
       if (Trains.Names.indexOf(myTrains.Names[i]) < 0) {
-        addTrainToSchedule(myTrains.Names[i] , myTrains.Destinations[i], myTrains.Frequencies[i]); 
-      } 
+        addTrainToSchedule(myTrains.Names[i] , myTrains.Destinations[i], myTrains.Frequencies[i], myTrains.FirstArrival[i]); 
+      }
     }
     Trains = myTrains;
   });
 $(document).on('click', '#submit-button', function(event){
-  alert("Submission");
   event.preventDefault();
-  addTrainToSchedule($('#train-name').val() , $('#destination').val() , $('#frequency').val()); 
+  addTrainToSchedule($('#train-name').val() , $('#destination').val() , $('#frequency').val(), $('#first-train-time').val()); 
   database.ref().set({
     Trains: Trains
   });
 });
+function convertMinutesToMilitaryTime(minutes)
+ { 
+  var hrs = Math.floor(minutes / 60); 
+  if (hrs % 24 === 0) {
+    hrs = 0;
+  } 
+  var mins = minutes % 60;
+  if (hrs < 10) {
+    if (mins < 10) {
+      return "0" + hrs + ":0" + mins;
+    } else {
+      return "0" + hrs + ":" + mins;
+    }
+  } else {
+    if (mins < 10) {
+      return hrs + ":0" + mins;
+    } else {
+      return hrs + ":" + mins;         
+    }
+  }
+}
 //  function that adds a new list element for the new train being added by the user on clicking 
 //  the submit button
-function addTrainToSchedule(name, destination, frequency) {
+function addTrainToSchedule(name, destination, frequency, firstArrivalTime) {
     var $myTrainSchedule = $("#my-train-schedule");
     var $li = $('<li class="list-group-item list-group-item-secondary my-line-items"></li>');
     var $row = $('<div class="row" style="text-align: center"></div>');
@@ -52,8 +74,23 @@ function addTrainToSchedule(name, destination, frequency) {
     var $destinationColumn = $('<div class="col-sm-2">' + destination + '</div>');
     $firstTrainTime = $('#first-train-time').val();
     var $frequencyColumn = $('<div class="col-sm-2">' + frequency + '</div>');
-    var $nextArrivalColumn = $('<div class="col-sm-2">18:55</div>');
-    var $minutesAwayColumn = $('<div class="col-sm-4">145</div>');
+    // Convert first-arrival time into total minutes
+    var time = firstArrivalTime.split(':');
+    var hours = Number(time[0]);
+    var minutes = Number(time[1]);
+    var firstArrivalMinutes = minutes + hours * 60;
+    // Get current time
+    var today = new Date();
+    var currentMinutes = 60 * today.getHours() + today.getMinutes();
+    if (firstArrivalMinutes > currentMinutes) {
+      var minutesAway = firstArrivalMinutes - currentMinutes; 
+    }
+    else {
+      var minutesAway = frequency - currentMinutes % frequency;
+    }
+    var nextArrivalTime = currentMinutes + minutesAway;
+    var $nextArrivalColumn = $('<div class="col-sm-2">' + convertMinutesToMilitaryTime(nextArrivalTime) + '</div>');
+    var $minutesAwayColumn = $('<div class="col-sm-4">' + minutesAway + '</div>');
     $row.append($trainNameColumn);
     $row.append($destinationColumn);
     $row.append($frequencyColumn);
@@ -67,4 +104,5 @@ function addTrainToSchedule(name, destination, frequency) {
     Trains.Names.push(name);
     Trains.Destinations.push(destination);
     Trains.Frequencies.push(frequency);
+    Trains.FirstArrival.push(firstArrivalTime);
 }

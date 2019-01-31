@@ -24,22 +24,27 @@
   // });
 
   database.ref().on('value', function(snapshot) {
-    alert("Updated");
+    event.preventDefault();
     var value = snapshot.val();
-    Trains = value.Trains;
-    for (i=0;i<Trains.Names.length;i++) {
-      addTrainToSchedule(Trains.Names[i] , Trains.Destinations[i], Trains.Frequencies[i]);  
+    var myTrains = value.Trains;
+    for (i=0;i<myTrains.Names.length;i++) {
+      if (Trains.Names.indexOf(myTrains.Names[i]) < 0) {
+        addTrainToSchedule(myTrains.Names[i] , myTrains.Destinations[i], myTrains.Frequencies[i]); 
+      } 
     }
-    $('#click-value').text(value.counter);
+    Trains = myTrains;
   });
 $(document).on('click', '#submit-button', function(event){
+  alert("Submission");
   event.preventDefault();
   addTrainToSchedule($('#train-name').val() , $('#destination').val() , $('#frequency').val()); 
+  database.ref().set({
+    Trains: Trains
+  });
 });
 //  function that adds a new list element for the new train being added by the user on clicking 
 //  the submit button
 function addTrainToSchedule(name, destination, frequency) {
-  alert("Submission");
     var $myTrainSchedule = $("#my-train-schedule");
     var $li = $('<li class="list-group-item list-group-item-secondary my-line-items"></li>');
     var $row = $('<div class="row" style="text-align: center"></div>');
@@ -59,4 +64,7 @@ function addTrainToSchedule(name, destination, frequency) {
     $('#train-name').val('');
     $('#destination').val('');
     $('#frequency').val('');
+    Trains.Names.push(name);
+    Trains.Destinations.push(destination);
+    Trains.Frequencies.push(frequency);
 }

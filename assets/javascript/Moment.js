@@ -25,24 +25,51 @@
   //   Trains: initialTrains
   // });
 
+  var intervalId = setInterval(updateScheduleDisplay, 10000);
+//________________________________________________________________
+  function updateScheduleDisplay() {
+    var myListElements = $('.my-line-items');
+    for (i=0;i<myListElements.length;i++) {
+      myListElements[i].remove();
+    }
+//________________________________________________________________
+    for (i=0;i<Trains.Names.length;i++) {
+        updateTrainOnSchedule(Trains.Names[i] , 
+                              Trains.Destinations[i], 
+                              Trains.Frequencies[i], 
+                              Trains.FirstArrival[i],
+                              false); 
+    }
+  }
+//________________________________________________________________
   database.ref().on('value', function(snapshot) {
     event.preventDefault();
     var value = snapshot.val();
     var myTrains = value.Trains;
     for (i=0;i<myTrains.Names.length;i++) {
       if (Trains.Names.indexOf(myTrains.Names[i]) < 0) {
-        addTrainToSchedule(myTrains.Names[i] , myTrains.Destinations[i], myTrains.Frequencies[i], myTrains.FirstArrival[i]); 
+        updateTrainOnSchedule(myTrains.Names[i] , 
+                              myTrains.Destinations[i], 
+                              myTrains.Frequencies[i], 
+                              myTrains.FirstArrival[i],
+                              true); 
       }
     }
     Trains = myTrains;
   });
+//________________________________________________________________
 $(document).on('click', '#submit-button', function(event){
   event.preventDefault();
-  addTrainToSchedule($('#train-name').val() , $('#destination').val() , $('#frequency').val(), $('#first-train-time').val()); 
+  updateTrainOnSchedule($('#train-name').val() , 
+                        $('#destination').val() , 
+                        $('#frequency').val(), 
+                        $('#first-train-time').val(),
+                        true); 
   database.ref().set({
     Trains: Trains
   });
 });
+//________________________________________________________________
 function convertMinutesToMilitaryTime(minutes)
  { 
   var hrs = Math.floor(minutes / 60); 
@@ -64,9 +91,10 @@ function convertMinutesToMilitaryTime(minutes)
     }
   }
 }
-//  function that adds a new list element for the new train being added by the user on clicking 
-//  the submit button
-function addTrainToSchedule(name, destination, frequency, firstArrivalTime) {
+//________________________________________________________________
+//  function that adds a new list element for the new train being 
+//  added by the user on clicking the submit button
+function updateTrainOnSchedule(name, destination, frequency, firstArrivalTime, addToList) {
     var $myTrainSchedule = $("#my-train-schedule");
     var $li = $('<li class="list-group-item list-group-item-secondary my-line-items"></li>');
     var $row = $('<div class="row" style="text-align: center"></div>');
@@ -101,8 +129,10 @@ function addTrainToSchedule(name, destination, frequency, firstArrivalTime) {
     $('#train-name').val('');
     $('#destination').val('');
     $('#frequency').val('');
-    Trains.Names.push(name);
-    Trains.Destinations.push(destination);
-    Trains.Frequencies.push(frequency);
-    Trains.FirstArrival.push(firstArrivalTime);
+    if (addToList) {
+      Trains.Names.push(name);
+      Trains.Destinations.push(destination);
+      Trains.Frequencies.push(frequency);
+      Trains.FirstArrival.push(firstArrivalTime);
+    }
 }

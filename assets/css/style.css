@@ -5,7 +5,10 @@
     -o-background-size: cover;
     background-size: cover;
   } */
-
+.my-list-header-row {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
 .my-line-items {
     padding-top: 3px;
     padding-bottom: 3px;
@@ -42,9 +45,6 @@
 }
 #submit-button {
     margin-top: 10px;
-    /* background-color: rgb(2, 2, 148);
-    border: 2px solid white; */
-    /* color: white; */
 }
 #schedule-card-header {
     padding-top: 2px;
@@ -53,6 +53,11 @@
     text-align: center; 
     background-color:rgb(2, 2, 148);
     color: white;
+}
+#schedule-list-element-header {
+    padding-top: 4px;
+    padding-bottom:4px;
+  
 }
 #new-train-card-header {
     margin-bottom: -10px;
@@ -63,3 +68,4 @@
     background-color:rgb(2, 2, 148);
     color: white;
 }
+

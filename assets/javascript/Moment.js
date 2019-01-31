@@ -25,7 +25,7 @@
   //   Trains: initialTrains
   // });
 
-  var intervalId = setInterval(updateScheduleDisplay, 10000);
+  var intervalId = setInterval(updateScheduleDisplay, 60000);
 //________________________________________________________________
   function updateScheduleDisplay() {
     var myListElements = $('.my-line-items');
@@ -68,6 +68,11 @@ $(document).on('click', '#submit-button', function(event){
   database.ref().set({
     Trains: Trains
   });
+  //  Clear form input fields
+  $('#train-name').val('');
+  $('#destination').val('');
+  $('#frequency').val('');
+  $('#first-train-time').val('');
 });
 //________________________________________________________________
 function convertMinutesToMilitaryTime(minutes)
@@ -126,9 +131,6 @@ function updateTrainOnSchedule(name, destination, frequency, firstArrivalTime, a
     $row.append($minutesAwayColumn);
     $li.append($row);
     $myTrainSchedule.append($li);
-    $('#train-name').val('');
-    $('#destination').val('');
-    $('#frequency').val('');
     if (addToList) {
       Trains.Names.push(name);
       Trains.Destinations.push(destination);

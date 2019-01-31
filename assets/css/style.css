@@ -42,15 +42,17 @@
 }
 #submit-button {
     margin-top: 10px;
-    background-color: red;
-    border: 1px solid darkred;
+    /* background-color: rgb(2, 2, 148);
+    border: 2px solid white; */
+    /* color: white; */
 }
 #schedule-card-header {
     padding-top: 2px;
     padding-bottom: 2px;
     font-size: 24px; 
     text-align: center; 
-    background-color: rgb(228, 167, 167);
+    background-color:rgb(2, 2, 148);
+    color: white;
 }
 #new-train-card-header {
     margin-bottom: -10px;
@@ -58,5 +60,6 @@
     padding-bottom: 2px;
     font-size: 24px; 
     text-align: center; 
-    background-color:rgb(104, 161, 187);
+    background-color:rgb(2, 2, 148);
+    color: white;
 }

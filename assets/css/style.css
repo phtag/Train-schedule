@@ -76,10 +76,16 @@
 #my-train-schedule {
     overflow-y: scroll;
     max-height: 200px;
+    border-radius: 0px 0px 5px 5px;
 }
 #my-train-schedule-card {
     padding-top: 5px;
     padding-bottom: 10px;
 }
-
+#my-schedule-list-header {
+    border-radius: 5px 5px 0px 0px;
+    background-color: lightskyblue;
+    border: 1px solid lightskyblue;
+    margin-bottom: 0px;
+}
 

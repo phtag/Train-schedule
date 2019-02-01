@@ -26,6 +26,7 @@
   // });
 
   var intervalId = setInterval(updateScheduleDisplay, 60000);
+  // $("#my-train-schedule").scrollIntoView(false);
 //________________________________________________________________
   function updateScheduleDisplay() {
     var myListElements = $('.my-line-items');
@@ -56,6 +57,7 @@
       }
     }
     Trains = myTrains;
+    $("#my-train-schedule").scrollTop(0);
   });
 //________________________________________________________________
 $(document).on('click', '#submit-button', function(event){
@@ -73,6 +75,7 @@ $(document).on('click', '#submit-button', function(event){
   $('#destination').val('');
   $('#frequency').val('');
   $('#first-train-time').val('');
+  $("#my-train-schedule").scrollTop($("#my-train-schedule").height());
 });
 //________________________________________________________________
 function convertMinutesToMilitaryTime(minutes)
@@ -95,6 +98,17 @@ function convertMinutesToMilitaryTime(minutes)
       return hrs + ":" + mins;         
     }
   }
+}
+
+$('#my-train-schedule').on('scroll', myFunction);
+
+function myFunction() {
+  event.preventDefault();
+
+  // var headerRow = $('#my-header-row');
+  var $myTrainSchedule = $("#my-train-schedule");
+  // $headerRow.addClass("sticky");
+  // alert("Scrolling");
 }
 //________________________________________________________________
 //  function that adds a new list element for the new train being 

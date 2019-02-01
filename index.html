@@ -29,7 +29,7 @@
       </h1>
     </div>
     <!-- Row for Searching New York Times -->
-    <div class="row">
+    <div class="row" style="padding-bottom: 0px">
       <div class="col-sm-12">
         <br>
         <!-- First card is for handling the search parameters -->
@@ -37,10 +37,12 @@
           <div class="card-header" id="schedule-card-header">
             <strong>Current Train Schedule</strong>
           </div>
-          <div class="card-body">
-            <ul class="list-group list-group-flush" id="my-train-schedule">
-              <li class="list-group-item list-group-item-primary my-list-header-row">
-                <div class="row" style="text-align: center; font-weight: bold">
+          <div class="card-body" id="my-train-schedule-card">
+            <!-- <ul class="list-group list-group-flush" id="my-train-schedule"> -->
+              <!-- <ul class="list-group"> -->
+              <ul class="list-group">
+                  <li class="list-group-item list-group-item-primary my-list-header-row">
+                <div class="row" id="my-header-row" style="text-align: center; font-weight: bold">
                   <div class="col-sm-2">Train Name</div>
                   <div class="col-sm-2">Destination</div>
                   <div class="col-sm-2">Frequency (min)</div>
@@ -49,6 +51,7 @@
                 </div>
               </li>
             </ul>
+            <ul class="list-group list-group-flush" id="my-train-schedule"></ul>
           </div>
         </div>
         <div class="card">
@@ -85,7 +88,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
   <!-- Code to the JavaScript File -->
   <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
-  <script src="assets/javascript/Moment.js"></script>
+  <script src="assets/javascript/app.js"></script>
 
 </body>
 

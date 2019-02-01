@@ -43,6 +43,11 @@
     margin-top: 0px;
     margin-bottom: 10px;
 }
+.sticky {
+    position: sticky;
+    top: 0;
+    width: 100%
+}
 #submit-button {
     margin-top: 10px;
 }
@@ -68,4 +73,13 @@
     background-color:rgb(2, 2, 148);
     color: white;
 }
+#my-train-schedule {
+    overflow-y: scroll;
+    max-height: 200px;
+}
+#my-train-schedule-card {
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
 

@@ -9,7 +9,7 @@ The project taught us how to use Firebase to store data from a train schedule we
 ### Assignment Description
 In this assignment, a web page was created to display train arrival times with a form for adding new trains to the schedule of existing trains.
 
-![Train schedule Screenshot](assets/images/TrainScheduleScreenShot.JPG)
+![Train schedule Screenshot](assets/images/TrainScheduleScreenShot.jpg)
 
 This project is maintained by Peter Tag
 

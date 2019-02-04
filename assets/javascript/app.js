@@ -126,17 +126,31 @@ function updateTrainOnSchedule(name, destination, frequency, firstArrivalTime, a
     var hours = Number(time[0]);
     var minutes = Number(time[1]);
     var firstArrivalMinutes = minutes + hours * 60;
+
+    // build a moment-based first arrival time
+    var mFirstArrivaltime = moment(moment().format('MM/DD/YY') + ' ' + firstArrivalTime);
+    // alert(moment(mFirstArrivaltime).format('MM/DD/YYYY HH:mm') + " " + firstArrivalTime);
+    // take the difference between the current time and the first arrival time
+    var result = moment().diff(mFirstArrivaltime, 'minutes');
     // Get current time
-    var today = new Date();
-    var currentMinutes = 60 * today.getHours() + today.getMinutes();
-    if (firstArrivalMinutes > currentMinutes) {
-      var minutesAway = firstArrivalMinutes - currentMinutes; 
+    // var today = new Date();
+    // var currentMinutes = 60 * today.getHours() + today.getMinutes();
+    var currentMinutes = 60 * moment().hours() + moment().minutes();
+    // if (firstArrivalMinutes > currentMinutes) {
+    if (result < 0) {
+      var minutesAway = -result; 
     }
     else {
-      var minutesAway = frequency - currentMinutes % frequency;
+      var minutesAway = frequency - result % frequency;
     }
+
     var nextArrivalTime = currentMinutes + minutesAway;
-    var $nextArrivalColumn = $('<div class="col-sm-2">' + convertMinutesToMilitaryTime(nextArrivalTime) + '</div>');
+    var NAT = moment().add(minutesAway, 'minutes').format("HH:mm");
+    
+    // alert('firstArrivalTime=' + firstArrivalTime + ' result=' + result +
+    //   ' frequency=' + frequency + ' minutes away='+minutesAway + ' NAT='+NAT);
+    // var $nextArrivalColumn = $('<div class="col-sm-2">' + convertMinutesToMilitaryTime(nextArrivalTime) + '</div>');
+    var $nextArrivalColumn = $('<div class="col-sm-2">' + NAT + '</div>');
     var $minutesAwayColumn = $('<div class="col-sm-4">' + minutesAway + '</div>');
     $row.append($trainNameColumn);
     $row.append($destinationColumn);

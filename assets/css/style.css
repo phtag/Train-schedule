@@ -33,6 +33,9 @@
     margin-top: 2px;
     margin-bottom: 2px;
 } 
+#my-form {
+    overflow: auto;
+}
 .my-labels {
     font-weight: bold;
     margin-top: 2px;
